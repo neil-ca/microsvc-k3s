@@ -1,3 +1,6 @@
 src/auth/__pycache__/
-
 src/auth/env/
+
+src/gateway/__pycache__/
+src/gateway/env/
+
