@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>App</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+    <nav>
+        <a href="{{ url_for('index') }}">App</a>
+        <a href="#">About</a>
+    </nav> 
+    <hr>
+    <div class="content">
+        {% block content %} {% endblock %}
+    </div>
+    </body>
+</html>
