@@ -4,3 +4,4 @@ src/auth/env/
 src/gateway/__pycache__/
 src/gateway/env/
 
+src/converter/env/
