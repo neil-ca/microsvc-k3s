@@ -39,10 +39,11 @@ def login():
         return "missing credentials", 401
 
     conn = get_db()
-    res = conn.execute("SELECT email, password FROM users WHERE email = %s",
-                       (auth.username))
+    res = conn.execute("SELECT email, password FROM users WHERE email = ?",
+                       (auth.username,))
+    # conn.close()
 
-    if res > 0:
+    if res is not None:
         user_row = res.fetchone()
         email = user_row[0]
         password = user_row[1]

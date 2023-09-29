@@ -8,11 +8,10 @@ spec:
   selector:
     matchLabels:
       app: converter
-  replicas: 1
+  replicas: 4
   strategy:
     rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
+      maxSurge: 8
     type: RollingUpdate
   template:
     metadata:
@@ -21,5 +20,9 @@ spec:
     spec:
       containers:
         - name: converter
-          image: myjob:latest
-          imagePullPolicy: IfNotPresent
+          image: ulicode/converter
+          envFrom:
+            - configMapRef:
+                name: converter-configmap
+            - secretRef:
+                name: converter-secret
