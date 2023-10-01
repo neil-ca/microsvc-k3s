@@ -8,7 +8,7 @@ from auth_svc import access
 from storage import util
 
 server = Flask(__name__)
-server.config["MONGO_URI"] = "mongodb://my-mongo:27017/videos"
+server.config["MONGO_URI"] = "mongodb://localhost:27017/videos"
 
 mongo = PyMongo(server)
 
@@ -33,6 +33,8 @@ def login():
 @server.route("/upload", methods=["POST"])
 def upload():
     access, err = validate.token(request)
+    if err:
+        return err
     access = json.loads(access)
     if access["admin"]:
         if len(request.files) > 1 or len(request.files) < 1:
