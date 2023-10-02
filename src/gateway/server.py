@@ -1,4 +1,4 @@
-import gridfs
+from gridfs import GridFS
 import pika
 import json
 from flask import Flask, request
@@ -8,11 +8,17 @@ from auth_svc import access
 from storage import util
 
 server = Flask(__name__)
-server.config["MONGO_URI"] = "mongodb://localhost:27017/videos"
+# server.config["MONGO_URI"] = "mongodb://localhost:27017/videos"
 
-mongo = PyMongo(server)
+mongo = PyMongo(server, uri="mongodb://0.0.0.0:27017/videos")
+fs = GridFS(mongo.db)
 
-fs = gridfs.GridFS(mongo.db)
+filename = "test.txt"
+content = b"This is a test file content."
+
+# Upload the file to GridFS
+with fs.new_file(filename=filename) as f:
+    f.write(content)
 
 connection = pika.BlockingConnection(pika.ConnectionParameters(
     "rabbitmq"
@@ -43,6 +49,7 @@ def upload():
         for _, f in request.files.items():
             err = util.upload(f, fs, channel, access)
             if err:
+                print(err)
                 return err
         return "success", 200
     else:

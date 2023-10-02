@@ -9,7 +9,7 @@ import moviepy.editor
 def start(message, fs_videos, fs_mp3s, channel):
     message = json.loads(message)
     tf = tempfile.NamedTemporaryFile()
-    out = fs_videos.get(ObjectId["video_fid"])
+    out = fs_videos.get(ObjectId(message["video_fid"]))
 
     tf.write(out.read())
     # Create audio from temp video file
@@ -34,8 +34,8 @@ def start(message, fs_videos, fs_mp3s, channel):
             body=json.dumps(message),
             properties=pika.BasicProperties(
                     delivery_mode=pika.spec.PERSISTENT_DELIVERY_MODE
-            )
+            ),
         )
     except Exception as err:
         fs_mp3s.delete(fid)
-        return "failed to publish message"
+        return f"failed to publish message {err}"

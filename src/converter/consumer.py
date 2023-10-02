@@ -1,14 +1,13 @@
 import os
 import pika
 import sys
-import time
 from pymongo import MongoClient
 import gridfs
 from convert import mp3converter
 
 
 def main():
-    client = MongoClient("my-mongo", 27017)
+    client = MongoClient("0.0.0.0", 27017)
     db_videos = client.videos
     db_mp3s = client.mp3s
 
@@ -24,9 +23,9 @@ def main():
     def callback(ch, method, properties, body):
         err = mp3converter.start(body, fs_videos, fs_mp3s, ch)
         if err:
-            ch.basic_nack(delivery_tah=method.delivery_tag)
+            ch.basic_nack(delivery_tag=method.delivery_tag)
         else:
-            ch.basic_ack(delivery_tah=method.delivery_tag)
+            ch.basic_ack(delivery_tag=method.delivery_tag)
     channel.basic_consume(
         queue=os.environ.get("VIDEO_QUEUE"), on_message_callback=callback
     )
