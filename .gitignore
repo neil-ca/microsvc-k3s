@@ -6,3 +6,5 @@ src/gateway/env/
 
 src/converter/env/
 src/converter/test.mp4
+
+src/scraper/.gitignore
