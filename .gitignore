@@ -1,12 +1,7 @@
-src/auth/__pycache__/
-src/auth/env/
+video-mp3/**/env/
+video-mp3/**/__pycache__/
+video-mp3/converter/test.mp4
 
-src/gateway/__pycache__/
-src/gateway/env/
-
-src/converter/env/
-src/converter/test.mp4
-
-src/scraper/.gitignore
-src/scraper/target
-src/scraper/Secrets*.toml
+scraper/.gitignore
+scraper/target
+scraper/Secrets*.toml
