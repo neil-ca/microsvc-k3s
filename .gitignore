@@ -8,3 +8,5 @@ src/converter/env/
 src/converter/test.mp4
 
 src/scraper/.gitignore
+src/scraper/target
+src/scraper/Secrets*.toml
