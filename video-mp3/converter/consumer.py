@@ -7,7 +7,7 @@ from convert import mp3converter
 
 
 def main():
-    client = MongoClient("0.0.0.0", 27017)
+    client = MongoClient("linuxbox", 27017)
     db_videos = client.videos
     db_mp3s = client.mp3s
 
