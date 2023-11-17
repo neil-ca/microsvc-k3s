@@ -1,6 +1,7 @@
 # Services in k3s
+It's good to have tools like k3s, small and powerful,
+you can focus on deploy new features 
 Updating the mongo config in `mongod.conf`
-
 
 Requests to test the services
 ```sh
